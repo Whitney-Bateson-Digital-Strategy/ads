@@ -311,6 +311,10 @@
     margin-top: 20px;
     font-style: italic;
   }
+  .calc-note-context {
+    font-size: 14px;
+    margin-top: 8px;
+  }
   @media (max-width: 768px) {
     .calc-card { padding: 32px 24px; }
     .calc-results { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -1694,6 +1698,7 @@
         </div>
       </div>
       <p class="calc-note">Estimates based on real campaign averages. Your results will vary, but the math is sound. &#128202;</p>
+      <p class="calc-note calc-note-context">This is revenue generated directly from ads alone &mdash; not counting the people already on your list, organic traffic, or the subscribers from this month who&rsquo;ll convert in 3, 6, even 12 months from now. Every month you run ads, that pool of future clients and potential revenue grows.</p>
     </div>
   </div>
 </section>
@@ -2110,6 +2115,16 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(runCountup, 800);
   }
 
+});
+</script>
+<script>
+window.addEventListener('load', function() {
+  var widgetElement = document.createElement('charla-widget');
+  widgetElement.setAttribute("p", "d2cc65b6-3d1c-4ba2-8408-6fa0f507d646");
+  document.body.appendChild(widgetElement);
+  var widgetCode = document.createElement('script');
+  widgetCode.src = 'https://app.charla.com/widget/widget.js';
+  document.body.appendChild(widgetCode);
 });
 </script>
 </body>

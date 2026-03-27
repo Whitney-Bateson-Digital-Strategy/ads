@@ -989,32 +989,62 @@
 
   /* ─── ABOUT ─── */
   .about {
-    background: var(--teal) !important;
+    background:
+      radial-gradient(ellipse 60% 50% at 15% 20%, rgba(174,211,221,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 85% 80%, rgba(253,173,143,0.10) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 60% 10%, rgba(227,246,150,0.07) 0%, transparent 60%),
+      linear-gradient(160deg, #013d46 0%, #02525d 45%, #014a56 100%) !important;
     padding: 96px 48px;
     color: white;
+    position: relative;
+    overflow: hidden;
   }
-  .about-inner { max-width: 1000px; margin: 0 auto; }
+  .about::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(174,211,221,0.12) 0%, transparent 65%) !important;
+    top: -160px; right: -100px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .about::after {
+    content: '';
+    position: absolute;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(253,173,143,0.08) 0%, transparent 65%) !important;
+    bottom: -100px; left: -80px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .about-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
   .about-label { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime); margin-bottom: 16px; font-weight: 600; text-align: center; }
   .about-headline { font-size: clamp(28px, 3vw, 40px); color: white; margin-bottom: 12px; text-align: center; }
   .about-subhead { font-size: 17px; color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 56px; font-style: italic; }
   .about-duo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     margin-bottom: 48px;
   }
   .about-person {
     background: rgba(255,255,255,0.07) !important;
     border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 24px;
-    overflow: hidden;
+    border-radius: 20px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
     transition: transform 0.2s;
   }
-  .about-person:hover { transform: translateY(-4px); }
+  .about-person:hover { transform: translateY(-2px); }
   .about-person-photo {
-    width: 100%;
-    aspect-ratio: 3/4;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
     overflow: hidden;
+    flex-shrink: 0;
+    border: 3px solid rgba(255,255,255,0.15);
   }
   .about-person-photo img {
     width: 100%;
@@ -1023,26 +1053,26 @@
     object-position: top;
     display: block;
   }
-  .about-person-body { padding: 28px 32px 32px; }
+  .about-person-body { flex: 1; }
   .about-person-name {
     font-family: 'Playfair Display', serif;
-    font-size: 26px;
+    font-size: 20px;
     color: white;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .about-person-role {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--lime);
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
   .about-person-body p {
-    font-size: 15px;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.78);
-    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.72);
+    margin-bottom: 8px;
   }
   .about-person-body p:last-child { margin-bottom: 0; }
   .about-together {
@@ -1060,8 +1090,9 @@
   }
   .about-together strong { color: white; }
   @media (max-width: 768px) {
-    .about-duo { grid-template-columns: 1fr; }
-    .about-person-photo { aspect-ratio: 4/3; }
+    .about-duo { gap: 16px; }
+    .about-person { flex-direction: column; align-items: center; text-align: center; }
+    .about-person-photo { width: 80px; height: 80px; }
     .about-together { padding: 28px 24px; }
   }
 
@@ -1531,110 +1562,7 @@
     <p style="margin-top:16px;">You get done-for-you templates, swipe files, and real examples pulled from our actual ad campaigns. Every step has a walkthrough. Every decision has guidance.</p>
     <div class="intro-grid">
       <div class="intro-placeholder" style="background:none;border:none;padding:0;min-height:0;">
-        <style>
-          .scene {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 24px 40px 24px;
-            box-sizing: border-box;
-            width: 100%;
-          }
-          .monitor-wrap {
-            display: flex; flex-direction: column; align-items: center;
-            z-index: 2; flex-shrink: 0;
-          }
-          .monitor-body {
-            width: 360px;
-            background: #1c1c1e;
-            border-radius: 12px 12px 0 0;
-            padding: 8px 8px 0;
-            border: 2px solid #111;
-            border-bottom: none;
-          }
-          .monitor-screen { border-radius: 5px; overflow: hidden; width: 100%; height: 224px; }
-          .monitor-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-          .monitor-stand-top { width: 376px; height: 7px; background: #2a2a2a; border-radius: 0 0 3px 3px; }
-          .monitor-stand-neck { width: 32px; height: 24px; background: #2a2a2a; }
-          .monitor-stand-base { width: 110px; height: 9px; background: #2a2a2a; border-radius: 5px; }
-          .laptop-wrap {
-            display: flex; flex-direction: column; align-items: center;
-            z-index: 3; flex-shrink: 0;
-            margin-right: -20px;
-          }
-          .laptop-lid {
-            width: 220px;
-            background: #1c1c1e;
-            border-radius: 8px 8px 0 0;
-            padding: 6px 6px 0;
-            border: 1.5px solid #111;
-            border-bottom: none;
-          }
-          .laptop-screen { border-radius: 3px; overflow: hidden; width: 100%; height: 138px; }
-          .scroll-inner { display: flex; flex-direction: column; animation: autoScroll 7s ease-in-out infinite alternate; }
-          @keyframes autoScroll {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-58%); }
-          }
-          .scroll-inner img { width: 100%; display: block; }
-          .laptop-hinge { width: 232px; height: 4px; background: #2a2a2a; }
-          .laptop-base {
-            width: 232px; height: 11px; background: #d0d0d0;
-            border-radius: 0 0 5px 5px; border: 1.5px solid #bbb; border-top: none;
-            display: flex; align-items: center; justify-content: center;
-          }
-          .laptop-foot { width: 204px; height: 3px; background: #bbb; border-radius: 0 0 3px 3px; }
-          .phone-wrap {
-            display: flex; flex-direction: column; align-items: center;
-            z-index: 4; flex-shrink: 0;
-            margin-left: -20px;
-          }
-          .phone-shell {
-            width: 96px; background: #1c1c1e;
-            border-radius: 22px; padding: 7px 5px;
-            border: 1.5px solid #111;
-          }
-          .phone-notch { width: 28px; height: 6px; background: #111; border-radius: 0 0 7px 7px; margin: 0 auto 4px; }
-          .phone-screen { border-radius: 15px; overflow: hidden; height: 174px; }
-          .phone-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-          .phone-bar { width: 28px; height: 3px; background: #444; border-radius: 3px; margin: 4px auto 0; }
-        </style>
-        <div class="scene">
-          <div class="laptop-wrap">
-            <div class="laptop-lid">
-              <div class="laptop-screen">
-                <div class="scroll-inner">
-                  <img src="http://priscillazaehringer.com/wp-content/uploads/2026/03/screencapture-whitney-bateson-digital-strategy-github-io-ads-made-simple-2026-03-26-23_10_00.png" alt="Sam generator" />
-                  <img src="http://priscillazaehringer.com/wp-content/uploads/2026/03/Searchable-Hook.png" alt="Template 1" />
-                  <img src="http://priscillazaehringer.com/wp-content/uploads/2026/03/Outcome-Without-Overwhelm.png" alt="Template 2" />
-                  <img src="http://priscillazaehringer.com/wp-content/uploads/2026/03/Problem-Aware.png" alt="Template 3" />
-                </div>
-              </div>
-            </div>
-            <div class="laptop-hinge"></div>
-            <div class="laptop-base"><div style="width:40px;height:3px;background:#c0c0c0;border-radius:2px;"></div></div>
-            <div class="laptop-foot"></div>
-          </div>
-          <div class="monitor-wrap">
-            <div class="monitor-body">
-              <div class="monitor-screen">
-                <img src="http://priscillazaehringer.com/wp-content/uploads/2026/03/screencapture-whitney-bateson-digital-strategy-github-io-ads-made-simple-2026-03-26-23_10_00.png" alt="Sam generator" />
-              </div>
-            </div>
-            <div class="monitor-stand-top"></div>
-            <div style="display:flex;justify-content:center;"><div class="monitor-stand-neck"></div></div>
-            <div class="monitor-stand-base"></div>
-          </div>
-          <div class="phone-wrap">
-            <div class="phone-shell">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <img src="http://priscillazaehringer.com/wp-content/uploads/2026/03/Ads-Made-Simple-1.png" alt="Slide deck" />
-              </div>
-              <div class="phone-bar"></div>
-            </div>
-          </div>
-        </div>
+        <img src="http://priscillazaehringer.com/wp-content/uploads/2026/03/Homepage-Magic-Mock-Ups-3.png" alt="Ads Made Simple mockup" style="width:100%;display:block;border-radius:16px;">
       </div>
       <div>
         <p style="font-size:17px;margin-bottom:20px;">By the time you&rsquo;re done, you&rsquo;ll have:</p>

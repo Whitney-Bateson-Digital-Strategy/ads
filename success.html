@@ -97,16 +97,16 @@
     align-items: flex-start;
   }
   .card-icon {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
+    background: var(--blue);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    font-size: 20px;
   }
-  .icon-teal { background: #c8eaed; }
+  .card-icon svg { width: 22px; height: 22px; }
   .card h2 {
     font-family: 'DM Serif Display', Georgia, serif;
     font-size: 19px;
@@ -119,6 +119,7 @@
     color: var(--muted);
     line-height: 1.65;
   }
+  .card p + p { margin-top: 10px; }
   .card p strong { color: var(--text); font-weight: 600; }
 
   .date-card {
@@ -128,7 +129,7 @@
     margin-bottom: 16px;
     display: flex;
     gap: 22px;
-    align-items: center;
+    align-items: flex-start;
   }
   .date-block {
     background: var(--orange);
@@ -163,8 +164,21 @@
     font-size: 14px;
     color: rgba(255,255,255,0.7);
     line-height: 1.65;
+    margin-bottom: 14px;
   }
   .date-content strong { color: #fff; }
+  .cal-link {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .cal-link:hover { background: rgba(255,255,255,0.22); }
 
   .section-label {
     font-size: 10px;
@@ -203,12 +217,24 @@
   .step p  { font-size: 14px; color: var(--muted); line-height: 1.6; }
   .step a  { color: var(--navy); font-weight: 600; }
 
+  .closing {
+    text-align: center;
+    padding: 8px 0 24px;
+  }
+  .closing p {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.5;
+  }
+
   .questions-card {
     background: var(--pink);
     border-radius: 16px;
     padding: 30px;
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
   .questions-card h3 {
     font-family: 'DM Serif Display', Georgia, serif;
@@ -229,13 +255,6 @@
     text-decoration: none;
   }
 
-  .social-row {
-    text-align: center;
-    padding: 22px 0;
-    border-top: 1px solid rgba(0,0,0,0.08);
-  }
-  .social-row p { font-size: 14px; color: var(--muted); margin-bottom: 14px; line-height: 1.6; }
-
   footer {
     background: var(--navy);
     text-align: center;
@@ -243,22 +262,19 @@
     color: rgba(255,255,255,0.45);
     font-size: 12px;
   }
-  footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  .party-banner { animation: fadeUp 0.4s ease both; }
-  .card         { animation: fadeUp 0.5s ease both; }
-  .card:nth-of-type(1) { animation-delay: 0.1s; }
-  .date-card    { animation: fadeUp 0.5s ease 0.2s both; }
+  .party-banner  { animation: fadeUp 0.4s ease both; }
+  .card          { animation: fadeUp 0.5s ease 0.1s both; }
+  .date-card     { animation: fadeUp 0.5s ease 0.2s both; }
   .step:nth-child(1) { animation: fadeUp 0.5s ease 0.28s both; }
   .step:nth-child(2) { animation: fadeUp 0.5s ease 0.36s both; }
   .step:nth-child(3) { animation: fadeUp 0.5s ease 0.44s both; }
-  .step:nth-child(4) { animation: fadeUp 0.5s ease 0.52s both; }
-  .questions-card { animation: fadeUp 0.5s ease 0.58s both; }
-  .social-row     { animation: fadeUp 0.5s ease 0.64s both; }
+  .closing       { animation: fadeUp 0.5s ease 0.5s both; }
+  .questions-card{ animation: fadeUp 0.5s ease 0.56s both; }
 
   @media (max-width: 540px) {
     .date-card { flex-direction: column; }
@@ -275,25 +291,33 @@
 <div class="party-banner">
   <img
     class="party-gif"
-    src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
+    src="https://media.giphy.com/media/g9582DNuQppxC/giphy.gif"
     alt="Celebration!"
+    onerror="this.src='https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif'"
   >
   <div class="party-eyebrow">You're officially in!</div>
   <h1 class="party-h1">YAY! Welcome to<br><em>Ads Made Simple.</em></h1>
-  <p class="party-sub">A confirmation email is on its way. Check your inbox (and your spam, just in case).</p>
+  <p class="party-sub">You made a great call. Here's everything you need to know before April 20th.</p>
 </div>
 
 <div class="main">
 
+  <!-- CONFIRMATION EMAIL CARD -->
   <div class="card">
-    <div class="card-icon icon-teal"></div>
+    <div class="card-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="4" width="20" height="16" rx="3" stroke="#02525d" stroke-width="1.5"/>
+        <path d="M2 8l10 6 10-6" stroke="#02525d" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
     <div>
-      <h2>Confirmation email</h2>
-      <p>Check your inbox for two emails: a <strong>purchase confirmation from ThriveCart</strong> and a <strong>Welcome email from us here at WBDS!</strong> Check your spam folder if you don't receive them shortly.</p>
-      <p style="margin-top: 10px;">If you also purchased the <strong>Email Marketing Jump Start</strong>, you'll receive a separate email with instructions on how to access that too!</p>
+      <h2>Your confirmation emails are on their way</h2>
+      <p>Look out for two emails: a <strong>purchase confirmation from ThriveCart</strong> and a <strong>Welcome email from us here at WBDS.</strong> If you don't see them shortly, check your spam folder and mark us as a trusted sender.</p>
+      <p>If you also purchased the <strong>Email Marketing Jump Start</strong>, you'll get a separate email with instructions on how to access that too!</p>
     </div>
   </div>
 
+  <!-- KICKOFF DATE CARD -->
   <div class="date-card">
     <div class="date-block">
       <div class="date-month">April</div>
@@ -302,30 +326,24 @@
     <div class="date-content">
       <h3>We kick off on April 20th</h3>
       <p>This gives you time to get your lead magnet and email sequence in place before we start, so you hit the ground running on day one! Everyone starts together, which means you get <strong>two full weeks of Slack support</strong> from the very beginning.</p>
+      <a class="cal-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ads+Made+Simple+Kicks+Off!&dates=20250420T120000Z/20250420T130000Z&details=Course+access+and+Slack+support+open+today.+Log+in+and+get+started!&location=https://whitneybateson.com" target="_blank">+ Add to Google Calendar</a>
     </div>
   </div>
 
-  <div class="section-label">In the meantime, here's what to do next</div>
+  <!-- NEXT STEPS -->
+  <div class="section-label">While you wait, here's what to do next</div>
   <div class="steps">
 
     <div class="step">
       <div class="step-num">1</div>
       <div>
-        <h4>Check your email</h4>
-        <p>Your confirmation and course access details are headed to your inbox right now.</p>
+        <h4>Get your lead magnet ready</h4>
+        <p>Don't have one yet, or want to update what you have? The <a href="https://whitneybateson.thrivecart.com/email-marketing-jump-start/" target="_blank">Email Marketing Jump Start</a> walks you through everything so you're ready to go on day one.</p>
       </div>
     </div>
 
     <div class="step">
       <div class="step-num">2</div>
-      <div>
-        <h4>Get your lead magnet ready</h4>
-        <p>Don't have one yet, or want to update what you have? The <a href="https://whitneybateson.thrivecart.com/email-marketing-jump-start/" target="_blank">Email Marketing Jump Start</a> will walk you through everything before April 20th.</p>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">3</div>
       <div>
         <h4>Set up your email platform</h4>
         <p>We recommend <strong>EmailOctopus</strong>. It's affordable, easy to use, and integrates seamlessly with everything we'll set up together.</p>
@@ -333,15 +351,7 @@
     </div>
 
     <div class="step">
-      <div class="step-num">4</div>
-      <div>
-        <h4>Mark your calendar</h4>
-        <p>April 20th is the big day. Course access and Slack support open then. We'll be in touch before that with everything you need.</p>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">5</div>
+      <div class="step-num">3</div>
       <div>
         <h4>Join our Facebook Group</h4>
         <p>Come hang out while you wait! Tips, support, and a great community of practitioners all in one place. <a href="https://whitneybateson.com/fbgroup" target="_blank">Join the group here.</a></p>
@@ -350,17 +360,17 @@
 
   </div>
 
+  <!-- QUESTIONS -->
   <div class="questions-card">
     <h3>Have a question?</h3>
     <p>We're happy to help. Reach out and we'll get back to you as soon as we can.</p>
     <a href="mailto:admin@whitneybateson.com" class="btn">Email us at admin@whitneybateson.com</a>
   </div>
 
-
 </div>
 
 <footer>
-  <p>© 2026 Whitney Bateson Digital Strategy, LLC</p>
+  <p>&#169; 2026 Whitney Bateson Digital Strategy, LLC</p>
 </footer>
 
 </body>

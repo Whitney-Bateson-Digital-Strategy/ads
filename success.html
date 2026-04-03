@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In! | Ads Made Simple</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:  #efeae3;
+    --pink:   #ffcdcd;
+    --orange: #ff7f50;
+    --lime:   #e3f696;
+    --blue:   #aed3dd;
+    --navy:   #02525d;
+    --white:  #ffffff;
+    --text:   #1a1a1a;
+    --muted:  #5a5a5a;
+  }
+
+  body {
+    font-family: proxima-nova, 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .topbar {
+    background: var(--navy);
+    text-align: center;
+    padding: 16px 20px;
+  }
+  .topbar img { height: 38px; object-fit: contain; }
+
+  .party-banner {
+    background: var(--navy);
+    text-align: center;
+    padding: 36px 24px 52px;
+  }
+  .party-gif {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--orange);
+    margin-bottom: 22px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .party-eyebrow {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .party-h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(32px, 6vw, 50px);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .party-h1 em { font-style: italic; color: var(--lime); }
+  .party-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 44px 24px 80px;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.07);
+    padding: 26px 28px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+  }
+  .icon-teal { background: #c8eaed; }
+  .card h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 7px;
+  }
+  .card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .card p strong { color: var(--text); font-weight: 600; }
+
+  .date-card {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 26px 28px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 22px;
+    align-items: center;
+  }
+  .date-block {
+    background: var(--orange);
+    border-radius: 10px;
+    padding: 10px 16px;
+    text-align: center;
+    flex-shrink: 0;
+    min-width: 66px;
+  }
+  .date-month {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  .date-day {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1;
+    color: #fff;
+  }
+  .date-content h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+    margin-bottom: 7px;
+    color: #fff;
+  }
+  .date-content p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.65;
+  }
+  .date-content strong { color: #fff; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    margin-top: 4px;
+  }
+  .steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .step {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.07);
+    padding: 18px 22px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+  .step p  { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .step a  { color: var(--navy); font-weight: 600; }
+
+  .questions-card {
+    background: var(--pink);
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .questions-card h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 21px;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .questions-card p { font-size: 14px; color: var(--muted); margin-bottom: 18px; line-height: 1.6; }
+  .btn {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 26px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  .social-row {
+    text-align: center;
+    padding: 22px 0;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .social-row p { font-size: 14px; color: var(--muted); margin-bottom: 14px; line-height: 1.6; }
+
+  footer {
+    background: var(--navy);
+    text-align: center;
+    padding: 22px;
+    color: rgba(255,255,255,0.45);
+    font-size: 12px;
+  }
+  footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .party-banner { animation: fadeUp 0.4s ease both; }
+  .card         { animation: fadeUp 0.5s ease both; }
+  .card:nth-of-type(1) { animation-delay: 0.1s; }
+  .date-card    { animation: fadeUp 0.5s ease 0.2s both; }
+  .step:nth-child(1) { animation: fadeUp 0.5s ease 0.28s both; }
+  .step:nth-child(2) { animation: fadeUp 0.5s ease 0.36s both; }
+  .step:nth-child(3) { animation: fadeUp 0.5s ease 0.44s both; }
+  .step:nth-child(4) { animation: fadeUp 0.5s ease 0.52s both; }
+  .questions-card { animation: fadeUp 0.5s ease 0.58s both; }
+  .social-row     { animation: fadeUp 0.5s ease 0.64s both; }
+
+  @media (max-width: 540px) {
+    .date-card { flex-direction: column; }
+    .card { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <img src="https://whitneybateson.com/wp-content/uploads/2025/06/Primary-White.png" alt="Whitney Bateson Digital Strategy">
+</div>
+
+<div class="party-banner">
+  <img
+    class="party-gif"
+    src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
+    alt="Celebration!"
+  >
+  <div class="party-eyebrow">You're officially in!</div>
+  <h1 class="party-h1">YAY! Welcome to<br><em>Ads Made Simple.</em></h1>
+  <p class="party-sub">A confirmation email is on its way. Check your inbox (and your spam, just in case).</p>
+</div>
+
+<div class="main">
+
+  <div class="card">
+    <div class="card-icon icon-teal"></div>
+    <div>
+      <h2>Confirmation email</h2>
+      <p>Check your inbox for two emails: a <strong>purchase confirmation from ThriveCart</strong> and a <strong>Welcome email from us here at WBDS!</strong> Check your spam folder if you don't receive them shortly.</p>
+      <p style="margin-top: 10px;">If you also purchased the <strong>Email Marketing Jump Start</strong>, you'll receive a separate email with instructions on how to access that too!</p>
+    </div>
+  </div>
+
+  <div class="date-card">
+    <div class="date-block">
+      <div class="date-month">April</div>
+      <div class="date-day">20</div>
+    </div>
+    <div class="date-content">
+      <h3>We kick off on April 20th</h3>
+      <p>This gives you time to get your lead magnet and email sequence in place before we start, so you hit the ground running on day one! Everyone starts together, which means you get <strong>two full weeks of Slack support</strong> from the very beginning.</p>
+    </div>
+  </div>
+
+  <div class="section-label">In the meantime, here's what to do next</div>
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h4>Check your email</h4>
+        <p>Your confirmation and course access details are headed to your inbox right now.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h4>Get your lead magnet ready</h4>
+        <p>Don't have one yet, or want to update what you have? The <a href="https://whitneybateson.thrivecart.com/email-marketing-jump-start/" target="_blank">Email Marketing Jump Start</a> will walk you through everything before April 20th.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h4>Set up your email platform</h4>
+        <p>We recommend <strong>EmailOctopus</strong>. It's affordable, easy to use, and integrates seamlessly with everything we'll set up together.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h4>Mark your calendar</h4>
+        <p>April 20th is the big day. Course access and Slack support open then. We'll be in touch before that with everything you need.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div>
+        <h4>Join our Facebook Group</h4>
+        <p>Come hang out while you wait! Tips, support, and a great community of practitioners all in one place. <a href="https://whitneybateson.com/fbgroup" target="_blank">Join the group here.</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="questions-card">
+    <h3>Have a question?</h3>
+    <p>We're happy to help. Reach out and we'll get back to you as soon as we can.</p>
+    <a href="mailto:admin@whitneybateson.com" class="btn">Email us at admin@whitneybateson.com</a>
+  </div>
+
+
+</div>
+
+<footer>
+  <p>© 2026 Whitney Bateson Digital Strategy, LLC</p>
+</footer>
+
+</body>
+</html>

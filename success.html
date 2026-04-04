@@ -25,6 +25,7 @@
     background: var(--cream);
     color: var(--text);
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   .topbar {
@@ -34,10 +35,32 @@
   }
   .topbar img { height: 38px; object-fit: contain; }
 
+  /* ---- CONFETTI ---- */
+  .confetti-wrap {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    top: -20px;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(600px) rotate(720deg); opacity: 0; }
+  }
+
   .party-banner {
     background: var(--navy);
     text-align: center;
     padding: 36px 24px 52px;
+    position: relative;
   }
   .party-gif {
     width: 200px;
@@ -49,6 +72,11 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    animation: pulseGlow 2.5s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 127, 80, 0.4); }
+    50%      { box-shadow: 0 0 0 14px rgba(255, 127, 80, 0); }
   }
   .party-eyebrow {
     display: inline-block;
@@ -61,6 +89,12 @@
     padding: 6px 18px;
     border-radius: 20px;
     margin-bottom: 16px;
+    animation: popIn 0.5s ease 0.3s both;
+  }
+  @keyframes popIn {
+    0%   { transform: scale(0); opacity: 0; }
+    70%  { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
   }
   .party-h1 {
     font-family: 'DM Serif Display', Georgia, serif;
@@ -95,6 +129,11 @@
     display: flex;
     gap: 16px;
     align-items: flex-start;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   }
   .card-icon {
     width: 44px;
@@ -138,6 +177,11 @@
     text-align: center;
     flex-shrink: 0;
     min-width: 66px;
+    animation: gentleBounce 2s ease-in-out infinite;
+  }
+  @keyframes gentleBounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
   }
   .date-month {
     font-size: 10px;
@@ -177,8 +221,9 @@
     border-radius: 8px;
     text-decoration: none;
     border: 1px solid rgba(255,255,255,0.25);
+    transition: background 0.2s ease, transform 0.2s ease;
   }
-  .cal-link:hover { background: rgba(255,255,255,0.22); }
+  .cal-link:hover { background: rgba(255,255,255,0.22); transform: translateY(-1px); }
 
   .section-label {
     font-family: 'DM Serif Display', Georgia, serif;
@@ -197,6 +242,11 @@
     display: flex;
     gap: 14px;
     align-items: flex-start;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .step:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.07);
   }
   .step-num {
     width: 26px;
@@ -227,6 +277,14 @@
     color: var(--navy);
     line-height: 1.5;
   }
+  .closing .signature {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 16px;
+    font-style: normal;
+    color: var(--orange);
+    margin-top: 6px;
+    font-weight: 400;
+  }
 
   .questions-card {
     background: var(--pink);
@@ -234,7 +292,9 @@
     padding: 30px;
     text-align: center;
     margin-bottom: 32px;
+    transition: transform 0.25s ease;
   }
+  .questions-card:hover { transform: translateY(-2px); }
   .questions-card h3 {
     font-family: 'DM Serif Display', Georgia, serif;
     font-size: 21px;
@@ -252,27 +312,33 @@
     padding: 12px 26px;
     border-radius: 8px;
     text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(2, 82, 93, 0.3);
   }
 
-  .upgrade-card {
+  .upgrade-inset {
     background: var(--lime);
-    border-radius: 16px;
-    padding: 28px 32px;
+    border-radius: 10px;
+    padding: 20px 24px;
     text-align: center;
-    margin-bottom: 16px;
+    margin-top: 18px;
+    border-top: 1px solid rgba(0,0,0,0.06);
   }
-  .upgrade-card h3 {
+  .upgrade-inset h4 {
     font-family: 'DM Serif Display', Georgia, serif;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 400;
     color: var(--navy);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
-  .upgrade-card p {
+  .upgrade-inset p {
     font-size: 14px;
     color: var(--muted);
     line-height: 1.65;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .upgrade-btn {
     display: inline-block;
@@ -283,8 +349,12 @@
     padding: 12px 26px;
     border-radius: 8px;
     text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .upgrade-btn:hover { opacity: 0.9; }
+  .upgrade-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(2, 82, 93, 0.3);
+  }
 
   footer {
     background: var(--navy);
@@ -294,18 +364,22 @@
     font-size: 12px;
   }
 
+  /* ---- SCROLL REVEAL ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   .party-banner  { animation: fadeUp 0.4s ease both; }
-  .card          { animation: fadeUp 0.5s ease 0.1s both; }
-  .date-card     { animation: fadeUp 0.5s ease 0.2s both; }
-  .step:nth-child(1) { animation: fadeUp 0.5s ease 0.28s both; }
-  .step:nth-child(2) { animation: fadeUp 0.5s ease 0.36s both; }
-  .step:nth-child(3) { animation: fadeUp 0.5s ease 0.44s both; }
-  .closing       { animation: fadeUp 0.5s ease 0.5s both; }
-  .questions-card{ animation: fadeUp 0.5s ease 0.56s both; }
 
   @media (max-width: 540px) {
     .date-card { flex-direction: column; }
@@ -320,6 +394,7 @@
 </div>
 
 <div class="party-banner">
+  <div class="confetti-wrap" id="confettiWrap"></div>
   <img
     class="party-gif"
     src="https://media.giphy.com/media/g9582DNuQppxC/giphy.gif"
@@ -334,7 +409,7 @@
 <div class="main">
 
   <!-- CONFIRMATION EMAIL CARD -->
-  <div class="card">
+  <div class="card reveal">
     <div class="card-icon">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="2" y="4" width="20" height="16" rx="3" stroke="#02525d" stroke-width="1.5"/>
@@ -349,24 +424,24 @@
   </div>
 
   <!-- KICKOFF DATE CARD -->
-  <div class="date-card">
+  <div class="date-card reveal">
     <div class="date-block">
       <div class="date-month">April</div>
       <div class="date-day">20</div>
     </div>
     <div class="date-content">
       <h3>We kick off on April 20th</h3>
-      <p>While Ads Made Simple is a self-paced course, your <strong>Slack access is limited to two weeks</strong> &mdash; and those two weeks start on April 20th for everyone. We're waiting to open access so you have time to get your lead magnet and email sequence in place first. That way, when your two weeks of Slack support begin, you can use every day of it to get answers and move forward.</p>
-      <p>On April 20th, you'll receive an <strong>email at 9:00 a.m. ET</strong> with your course link and Slack access. If you have any questions before then, email <a href="mailto:admin@whitneybateson.com" style="color: var(--lime); font-weight: 600;">admin@whitneybateson.com</a>.</p>
-      <a class="cal-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ads+Made+Simple+Kicks+Off!&dates=20250420/20250421&details=You%27ll+receive+an+email+at+9+a.m.+ET+with+your+course+link+and+Slack+access.+If+you+have+any+questions%2C+email+admin%40whitneybateson.com&location=https://whitneybateson.com" target="_blank">+ Add to Google Calendar</a>
+      <p>While Ads Made Simple is a self-paced program, your <strong>Slack access is limited to two weeks</strong>, and those two weeks start on April 20th for everyone. We are waiting to open access so you have time to get your lead magnet and email sequence in place first. That way, when your two weeks of Slack support begin, you can use every day of it to get answers and move forward.</p>
+      <p>On April 20th, you will receive an <strong>email at 9:00 a.m. ET</strong> with your program link and Slack access. If you have any questions before then, email <a href="mailto:admin@whitneybateson.com" style="color: var(--lime); font-weight: 600;">admin@whitneybateson.com</a>.</p>
+      <a class="cal-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Ads+Made+Simple+Kicks+Off!&dates=20250420/20250421&details=You%27ll+receive+an+email+at+9+a.m.+ET+with+your+program+link+and+Slack+access.+If+you+have+any+questions%2C+email+admin%40whitneybateson.com&location=https://whitneybateson.com" target="_blank">+ Add to Google Calendar</a>
     </div>
   </div>
 
   <!-- NEXT STEPS -->
-  <div class="section-label">While you wait, here's what to do next</div>
+  <div class="section-label reveal">While you wait, here's what to do next</div>
   <div class="steps">
 
-    <div class="step">
+    <div class="step reveal">
       <div class="step-num">1</div>
       <div>
         <h4>Get your lead magnet ready</h4>
@@ -374,7 +449,7 @@
       </div>
     </div>
 
-    <div class="step">
+    <div class="step reveal">
       <div class="step-num">2</div>
       <div>
         <h4>Set up your email platform</h4>
@@ -382,7 +457,7 @@
       </div>
     </div>
 
-    <div class="step">
+    <div class="step reveal">
       <div class="step-num">3</div>
       <div>
         <h4>Join our Facebook Group</h4>
@@ -393,36 +468,37 @@
   </div>
 
   <!-- EXTRA SUPPORT SECTION -->
-  <div style="background: var(--white); border-radius: 16px; border: 1px solid rgba(0,0,0,0.07); padding: 28px 32px; margin-bottom: 16px;">
+  <div class="reveal" style="background: var(--white); border-radius: 16px; border: 1px solid rgba(0,0,0,0.07); padding: 28px 32px; margin-bottom: 16px; transition: transform 0.25s ease, box-shadow 0.25s ease;">
     <h2 style="font-family: 'DM Serif Display', Georgia, serif; font-size: 19px; font-weight: 400; color: var(--navy); margin-bottom: 20px;">Got extra support? Here's what to expect.</h2>
 
     <div style="margin-bottom: 18px;">
-      <h4 style="font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px;">Course + Meta Setup &mdash; $497</h4>
-      <p style="font-size: 14px; color: var(--muted); line-height: 1.65;">Priscilla will reach out soon to walk you through giving her access to your Facebook Business Manager. <strong>Reminder:</strong> You will need to provide us with your creative and copy. No worries &mdash; once you have access to the program on April 20th, there are templates and a copy tool you can use to get everything ready.</p>
+      <h4 style="font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px;">Program + Meta Setup - $497</h4>
+      <p style="font-size: 14px; color: var(--muted); line-height: 1.65;">Priscilla will reach out soon to walk you through giving her access to your Facebook Business Manager. <strong>Reminder:</strong> You will need to provide us with your creative and copy. No worries - once you have access to the program on April 20th, there are templates and a copy tool you can use to get everything ready.</p>
     </div>
 
     <div style="padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.06); margin-bottom: 18px;">
-      <h4 style="font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px;">Full Done-For-You &mdash; $797</h4>
+      <h4 style="font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px;">Full Done-For-You - $797</h4>
       <p style="font-size: 14px; color: var(--muted); line-height: 1.65;">Priscilla will reach out soon to get access to your Facebook Business Manager. From there, she'll take care of everything. She'll write your copy, design your creative, and build your campaign from scratch.</p>
+    </div>
+
+    <!-- UPGRADE CTA (inside the white card) -->
+    <div class="upgrade-inset">
+      <h4>Interested in adding hands-on support?</h4>
+      <p>If you'd like to upgrade to one of our setup packages, we'd love to help.</p>
+      <a href="mailto:admin@whitneybateson.com?subject=Interested%20in%20adding%20hands-on%20support&body=Hi!%20I%20recently%20purchased%20Ads%20Made%20Simple%20and%20I'm%20interested%20in%20learning%20more%20about%20the%20setup%20packages.%20Can%20you%20share%20more%20details%3F" class="upgrade-btn">Get in Touch</a>
     </div>
   </div>
 
-  <!-- UPGRADE CTA -->
-  <div class="upgrade-card">
-    <h3>Interested in adding hands-on support?</h3>
-    <p>If you'd like to upgrade to one of our setup packages, we'd love to help. Click below and we'll get you squared away.</p>
-    <a href="mailto:admin@whitneybateson.com?subject=Interested%20in%20adding%20hands-on%20support&body=Hi!%20I%20recently%20purchased%20Ads%20Made%20Simple%20and%20I%E2%80%99m%20interested%20in%20learning%20more%20about%20the%20setup%20packages.%20Can%20you%20share%20more%20details%3F" class="upgrade-btn">Get in Touch</a>
-  </div>
-
   <!-- QUESTIONS -->
-  <div class="questions-card">
+  <div class="questions-card reveal">
     <h3>Have a question?</h3>
     <p>We're happy to help. Reach out and we'll get back to you as soon as we can.</p>
     <a href="mailto:admin@whitneybateson.com" class="btn">Email us at admin@whitneybateson.com</a>
   </div>
 
-  <div class="closing">
+  <div class="closing reveal">
     <p>"We can't wait to see your ads in action!"</p>
+    <p class="signature">- Whitney &amp; Priscilla</p>
   </div>
 
 </div>
@@ -430,6 +506,43 @@
 <footer>
   &copy; 2025 Whitney Bateson Digital Strategy. All rights reserved.
 </footer>
+
+<script>
+  // Confetti burst on page load
+  (function() {
+    var wrap = document.getElementById('confettiWrap');
+    var colors = ['#ff7f50','#e3f696','#ffcdcd','#aed3dd','#ffffff'];
+    for (var i = 0; i < 40; i++) {
+      var c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.left = Math.random() * 100 + '%';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.width = (6 + Math.random() * 8) + 'px';
+      c.style.height = (6 + Math.random() * 8) + 'px';
+      c.style.animationDuration = (2 + Math.random() * 2) + 's';
+      c.style.animationDelay = (Math.random() * 1.2) + 's';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      wrap.appendChild(c);
+    }
+  })();
+
+  // Scroll reveal
+  (function() {
+    var els = document.querySelectorAll('.reveal');
+    function check() {
+      var trigger = window.innerHeight * 0.88;
+      els.forEach(function(el) {
+        if (el.getBoundingClientRect().top < trigger) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', check);
+    window.addEventListener('resize', check);
+    // Initial check after a tiny delay so the page settles
+    setTimeout(check, 100);
+  })();
+</script>
 
 </body>
 </html>
